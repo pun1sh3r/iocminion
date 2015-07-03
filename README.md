@@ -29,7 +29,7 @@ Formats supported:
   --write WRITE        write Results to a file
 
 ```
-# usecases:
+# Usecases:
 - i would like to get iocs from a blog post i find interesting 
 ```
 python iocminion.py --url http://blog.malwaremustdie.org/2015/06/mmd-0034-2015-new-elf.html
@@ -38,5 +38,11 @@ python iocminion.py --url http://blog.malwaremustdie.org/2015/06/mmd-0034-2015-n
 ```
  python iocminion.py  --pdf http://www.welivesecurity.com/wp-content/uploads/2015/04/mumblehard.pdf
 ```
-- i have a list of 40 url's on a txt file and i would like to extract the ioc's of all of those pages o
-
+- i have a list of 40 url's on a txt file and i would like to extract the ioc's of all of those pages of one shot
+```
+python iocminion.py --url_file urls.txt
+```
+- i would like to process all ioc's but i would like to save them to a a file.
+```
+python iocminion.py --url http://blog.malwaremustdie.org/2015/06/mmd-0034-2015-new-elf.html -w outfile.txt
+```
