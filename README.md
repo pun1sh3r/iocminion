@@ -46,3 +46,7 @@ python iocminion.py --url_file urls.txt
 ```
 python iocminion.py --url http://blog.malwaremustdie.org/2015/06/mmd-0034-2015-new-elf.html -w outfile.txt
 ```
+- i would like to extract ioc's that are contained on several emails from my gmail inbox 
+```
+python iocClass.py  --email 'username  'password'
+```
