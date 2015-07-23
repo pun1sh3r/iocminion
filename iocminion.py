@@ -318,12 +318,9 @@ class iocMinion():
       except Exception as ex:
         print ex
     else:
-      #pprint.pprint(data)
-      with open(tempFile,'wb') as pdfDoc:
-	pdfDoc.write(data)
-      fd = open(tempFile,'rb').read()
+      fd = open(data,'rb').read()
       if 'PDF' in ms.buffer(fd):
-        fp = file(tempFile, 'rb')
+        fp = file(data, 'rb')
         rsrcmgr = PDFResourceManager()
         retstr = StringIO()
         codec = 'utf-8'
