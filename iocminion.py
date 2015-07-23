@@ -10,10 +10,13 @@ import os
 import datetime
 from collections import defaultdict
 import argparse
+<<<<<<< HEAD
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 import smtplib
+=======
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
 
 try:
   import gmail
@@ -25,6 +28,7 @@ try:
 except ImportError:
   print "BeautifulSoup not installed see: http://www.crummy.com/software/BeautifulSoup/ "
 try:
+<<<<<<< HEAD
   from pdfminer.pdfparser import PDFParser
   from pdfminer.pdfdocument import PDFDocument,PDFNoOutlines
   from pdfminer.pdfinterp import PDFResourceManager,PDFPageInterpreter
@@ -33,6 +37,14 @@ try:
   from pdfminer.layout import LAParams
 except ImportError as ex :
   print "pdfminer not installed see: https://github.com/euske/pdfminer %s" %(ex)
+=======
+  from pdfminer.pdfparser import PDFParser, PDFDocument, PDFNoOutlines
+  from pdfminer.pdfinterp import PDFResourceManager, process_pdf
+  from pdfminer.converter import TextConverter
+  from pdfminer.layout import LAParams
+except ImportError:
+  print "pdfminer not installed see: https://github.com/euske/pdfminer "
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
 
 try:
   import xml.etree.ElementTree as ET
@@ -53,6 +65,7 @@ class iocMinion():
     self.ipRegex = "\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\[?\.\]?){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):?\d+?\\b"
     self.domainRegex = "\\b([A-Z0-9_\-\.]+\[?\.\]?(?:XN--CLCHC0EA0B2G2A9GCD|XN--HGBK6AJ7F53BBA|XN--HLCJ6AYA9ESC7A|XN--11B5BS3A9AJ6G|XN--MGBERP4A5D4AR|XN--XKC2DL3A5EE0H|XN--80AKHBYKNJ4F|XN--XKC2AL3HYE2A|XN--LGBBAT1AD8J|XN--MGBC0A9AZCG|XN--9T4B11YI5A|XN--MGBAAM7A8H|XN--MGBAYH7GPA|XN--MGBBH1A71E|XN--FPCRJ9C3D|XN--FZC2C9E2C|XN--YFRO4I67O|XN--YGBI2AMMX|XN--3E0B707E|XN--JXALPDLP|XN--KGBECHTV|XN--OGBPF8FL|XN--0ZWM56D|XN--45BRJ9C|XN--80AO21A|XN--DEBA0AD|XN--G6W251D|XN--GECRJ9C|XN--H2BRJ9C|XN--J6W193G|XN--KPRW13D|XN--KPRY57D|XN--PGBS0DH|XN--S9BRJ9C|XN--90A3AC|XN--FIQS8S|XN--FIQZ9S|XN--O3CW4H|XN--WGBH1C|XN--WGBL6A|XN--ZCKZAH|XN--P1AI|XN--NGBC5AZD|XN--80ASEHDB|XN--80ASWG|XN--UNUP4Y|MUSEUM|TRAVEL|AERO|ARPA|ASIA|COOP|INFO|JOBS|MOBI|BIZ|CAT|COM|EDU|GOV|INT|MIL|NET|ORG|PRO|TEL|XXX|AC|AD|AE|AF|AG|AI|AL|AM|AN|AO|AQ|AR|AS|AT|AU|AW|AX|AZ|BA|BB|BD|BE|BF|BG|BH|BI|BJ|BM|BN|BO|BR|BS|BT|BV|BW|BY|BZ|CA|CC|CD|CF|CG|CH|CI|CK|CL|CM|CN|CO|CR|CU|CV|CW|CX|CY|CZ|DE|DJ|DK|DM|DO|DZ|EC|EE|EG|ER|ES|ET|EU|FI|FJ|FK|FM|FO|FR|GA|GB|GD|GE|GF|GG|GH|GI|GL|GM|GN|GP|GQ|GR|GS|GT|GU|GW|GY|HK|HM|HN|HR|HT|HU|ID|IE|IL|IM|IN|IO|IQ|IR|IS|IT|JE|JM|JO|JP|KE|KG|KH|KI|KM|KN|KP|KR|KW|KY|KZ|LA|LB|LC|LI|LK|LR|LS|LT|LU|LV|LY|MA|MC|MD|ME|MG|MH|MK|ML|MM|MN|MO|MP|MQ|MR|MS|MT|MU|MV|MW|MX|MY|MZ|NA|NC|NE|NF|NG|NI|NL|NO|NP|NR|NU|NZ|OM|PA|PE|PF|PG|PH|PK|PL|PM|PN|PR|PS|PT|PW|PY|QA|RE|RO|RS|RU|RW|SA|SB|SC|SD|SE|SG|SH|SI|SJ|SK|SL|SM|SN|SO|SR|ST|SU|SV|SX|SY|SZ|TC|TD|TF|TG|TH|TJ|TK|TL|TM|TN|TO|TP|TR|TT|TV|TW|TZ|UA|UG|UK|US|UY|UZ|VA|VC|VE|VG|VI|VN|VU|WF|WS|YE|YT|ZA|ZM|ZW))(?:\s|$)\\b"
   
+<<<<<<< HEAD
   def sendEmail(self,recipients,body,subject,files=None):
     print "sendEmail"
     try:
@@ -82,6 +95,9 @@ class iocMinion():
     except smtplib.SMTPException as e:
       print "error: %s" % e
     
+=======
+
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
   def parse_gmail(self,username,passwd,ioc_data):
     
     try:
@@ -203,6 +219,10 @@ class iocMinion():
   def get_domain(self,html,ioc_data):
     if (str(type(html)) == "<type 'str'>"):
       domain = re.findall(r'%s'% (self.domainRegex),html,re.I| re.S)
+<<<<<<< HEAD
+=======
+      #print "non html: %s" % (domain)
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
       for d in domain:
         ioc_data.add(d.lower())
     else:
@@ -233,7 +253,11 @@ class iocMinion():
       return res
     except urllib2.HTTPError,e:
       print "http error code:%s\turl:%s " %(e.code,url)
+<<<<<<< HEAD
       #sys.exit()
+=======
+      sys.exit()
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
   
   
   def val_domain(self,content):
@@ -268,6 +292,10 @@ class iocMinion():
       with open('whitelist.dat','rU') as csvfile:
 	csvreader = csv.reader(csvfile,delimiter=',')
 	for row in csvreader:
+<<<<<<< HEAD
+=======
+	  #pprint.pprint(row)
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
 	  if data:
 	    try:
 	      if IPAddress(data) in IPNetwork(row[0]) or IPAddress(data).is_private() :
@@ -276,17 +304,31 @@ class iocMinion():
 	      continue
     else: 
       with open('top-1m.csv','rb') as csvfile1:
+<<<<<<< HEAD
 	csvreader = csv.reader(csvfile1,delimiter=',') 
 	for row in csvreader:
 	  flag = row[1].find(data)
 	  if flag != -1:
+=======
+	csvreader = csv.reader(csvfile1,delimiter=',')
+	  #pprint.pprint(csvreader)
+	for row in csvreader:
+	  #flag = data.find(row[1])
+	  flag = row[1].find(data)
+	  if flag != -1:
+	    #print "flag: %s in row: %s" % (flag,row[1])
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
 	    return True        
   
   def parse_pdf(self,data):
     ms = magic.open(magic.MAGIC_NONE)
     ms.load()
+<<<<<<< HEAD
     tempFile = 'temp.pdf'
     
+=======
+    tempFile = 'temp.pdf' 
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
     if re.match(r'https?:\/\/.*\.pdf',data):
       res  = self.do_request(data)
       try:
@@ -299,6 +341,7 @@ class iocMinion():
           codec = 'utf-8'
           laparams = LAParams()
           device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+<<<<<<< HEAD
           interpreter = PDFPageInterpreter(rsrcmgr, device)
 	  password = ""
 	  maxpages = 0
@@ -306,6 +349,9 @@ class iocMinion():
 	  pagenos=set()
 	  for page in  PDFPage.get_pages (fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
 	    interpreter.process_page(page)
+=======
+          process_pdf(rsrcmgr, device, fp)
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
           fp.close()
           device.close()
           str1 = retstr.getvalue()
@@ -318,17 +364,24 @@ class iocMinion():
       except Exception as ex:
         print ex
     else:
+<<<<<<< HEAD
       #pprint.pprint(data)
       with open(tempFile,'wb') as pdfDoc:
 	pdfDoc.write(data)
       fd = open(tempFile,'rb').read()
       if 'PDF' in ms.buffer(fd):
         fp = file(tempFile, 'rb')
+=======
+      fd = open(data,'rb').read()
+      if 'PDF' in ms.buffer(fd):
+        fp = file(data, 'rb')
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
         rsrcmgr = PDFResourceManager()
         retstr = StringIO()
         codec = 'utf-8'
         laparams = LAParams()
         device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+<<<<<<< HEAD
         interpreter = PDFPageInterpreter(rsrcmgr, device)
 	password = ""
 	maxpages = 0
@@ -338,6 +391,9 @@ class iocMinion():
         for page in  PDFPage.get_pages (fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
 	  interpreter.process_page(page)
 	  #print page
+=======
+        process_pdf(rsrcmgr, device, fp)
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
         fp.close()
         device.close()
         str1 = retstr.getvalue()
@@ -399,6 +455,10 @@ def main():
     ioc_data[args.pdf[0]]['hashes'] = set()
     ioc_data[args.pdf[0]]['ip'] = set()
     ioc_data[args.pdf[0]]['domain'] = set()
+<<<<<<< HEAD
+=======
+    #print args.pdf[0]
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
     data = iocObj.parse_pdf(args.pdf[0])
     iocObj.get_hashes(data,ioc_data[args.pdf[0]]['hashes'],'\\b[a-fA-F0-9]{32}\\b')
     iocObj.get_hashes(data,ioc_data[args.pdf[0]]['hashes'],'\\b[a-fA-F0-9]{64}\\b')
@@ -416,4 +476,8 @@ def main():
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
   main()
+=======
+  main()
+>>>>>>> e87555ca52d9014cfc3badc773b7334aa7cc55cc
