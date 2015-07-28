@@ -57,7 +57,7 @@ class iocMinion():
     print "sendEmail"
     try:
       #atims relay 10.1.47.116
-      s = smtplib.SMTP('smtp.vzbi.com')
+      s = smtplib.SMTP('smtp.relay.com')
       s.set_debuglevel(1)
       if files:
 	msg = MIMEMultipart()
@@ -68,13 +68,11 @@ class iocMinion():
 	  msg.attach(part)
       else:
 	msg = MIMEText(body)
-      sender = 'autobot@verizon.com'
+      sender = 'test@test.com
       msg['Subject'] = subject
       msg['From'] = sender
-      #msg['CC'] = 'lmendieta@terremark.com,stephen.brannon@verizon.com'
-      #msg['CC'] = 'lmendieta@terremark.com,stephen.brannon@verizon.com'
       msg['To'] = ", ".join(recipients)
-      #msg['To'] = 'lmendieta@verizon.com'	
+      	
 	
       s.sendmail(sender,recipients,msg.as_string())
       s.close()
