@@ -56,7 +56,7 @@ class iocMinion():
   def sendEmail(self,recipients,body,subject,files=None):
     print "sendEmail"
     try:
-      #atims relay 10.1.47.116
+      
       s = smtplib.SMTP('smtp.relay.com')
       s.set_debuglevel(1)
       if files:
