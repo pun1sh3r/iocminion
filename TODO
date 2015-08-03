@@ -1,0 +1,3 @@
+- possibly add PE file analysis capabilities for quick triage.
+- possibly add VT/totalhash integration
+- trying to see if whois profiling can be accomplished for domains
