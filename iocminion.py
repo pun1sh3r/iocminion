@@ -113,7 +113,7 @@ class iocMinion():
 
     def print_iocs(self, ioc_data, toFile, outFile, format):
         fileOut = []
-
+        #test
         today = datetime.date.today().strftime("%Y-%m-%d")
         for key, values in ioc_data.iteritems():
             key = key.replace('\n', '')
