@@ -112,7 +112,39 @@ class iocMinion():
             sys.exit()
 
     def print_iocs(self, ioc_data, toFile, outFile, format):
+        #print ioc_data
+        buf = StringIO()
+        today = datetime.date.today().strftime("%Y-%m-%d")
+        if toFile == True:
+            csvwriter = csv.writer(outFile,dialect='excel',delimiter=',')
+        else:
+            csvwriter = csv.writer(buf,dialect='excel',delimiter=',')
+
+        for key,values in ioc_data.iteritems():
+            for k,v in sorted(values.iteritems()):
+                for l in v:
+                    if format == 'csv':
+                            csvwriter.writerow([today,k,l,key])
+                    elif format =='json':
+                        print "processing json"
+
+
+
+        if toFile == False:
+            print buf.getvalue()
+
+
+
+
+
+                        #print  k,l
+
+
+        '''
         fileOut = []
+        hash = dict()
+        ip[''] = dict()
+        domain = dict()
         #testet
         today = datetime.date.today().strftime("%Y-%m-%d")
         for key, values in ioc_data.iteritems():
@@ -126,27 +158,28 @@ class iocMinion():
                         matchDom = self.val_domain(j)
                         matchhash = self.val_hash(j)
                         if (matchhash == True ):
-                            fileOut.append("%s" % (j.encode('utf-8').lower()))
+                            hash['hash'].append("%s" % (j.encode('utf-8').lower()))
                         elif (matchip == True):
                             isinWl = self.isInWhitelist(j)
                             if (isinWl == True):
                                 continue
                             else:
-                                fileOut.append("%s" % (j.encode('utf-8').lower()))
+                                ip['ip'].append("%s" % (j.encode('utf-8').lower()))
                         else:
                             isinWl = self.isInWhitelist(j.lower())
                             if (isinWl == True):
                                 continue
                             else:
-                                fileOut.append("%s" % (j.encode('utf-8').lower()))
+                                domain['domain'].append("%s" % (j.encode('utf-8').lower()))
 
         if toFile == True:
             print "writing to file...."
-            with open(outFile, 'w') as fd:
-                fd.write('\n'.join(fileOut))
+            print hash
+            #with open(outFile, 'w') as fd:
+            #    fd.write('\n'.join(fileOut))
         else:
             print '\n'.join(fileOut)
-
+        '''
 
     def get_hashes(self, html, ioc_data, regex):
         if (str(type(html)) == "<type 'str'>"):
