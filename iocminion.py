@@ -14,6 +14,7 @@ from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 import smtplib
+import json
 
 try:
     import gmail
@@ -111,75 +112,22 @@ class iocMinion():
             print "auth error"
             sys.exit()
 
-    def print_iocs(self, ioc_data, toFile, outFile, format):
-        #print ioc_data
+    def print_iocs(self, ioc_data, format):
         buf = StringIO()
         today = datetime.date.today().strftime("%Y-%m-%d")
-        if toFile == True:
-            csvwriter = csv.writer(outFile,dialect='excel',delimiter=',')
-        else:
-            csvwriter = csv.writer(buf,dialect='excel',delimiter=',')
-
         for key,values in ioc_data.iteritems():
             for k,v in sorted(values.iteritems()):
                 for l in v:
                     if format == 'csv':
+                            csvwriter = csv.writer(buf,dialect='excel',delimiter=',')
                             csvwriter.writerow([today,k,l,key])
+
                     elif format =='json':
-                        print "processing json"
+                        line = json.dumps({l:{"date":today,"type":k,"source":key}},indent=4,sort_keys=True)
+                        buf.write(line)
 
+        print buf.getvalue()
 
-
-        if toFile == False:
-            print buf.getvalue()
-
-
-
-
-
-                        #print  k,l
-
-
-        '''
-        fileOut = []
-        hash = dict()
-        ip[''] = dict()
-        domain = dict()
-        #testet
-        today = datetime.date.today().strftime("%Y-%m-%d")
-        for key, values in ioc_data.iteritems():
-            key = key.replace('\n', '')
-            for k, v in values.iteritems():
-                if str(type(v)) == "<type 'NoneType'>":
-                    continue
-                for j in v:
-                    if (len(j) > 1):
-                        matchip = self.val_ip(j)
-                        matchDom = self.val_domain(j)
-                        matchhash = self.val_hash(j)
-                        if (matchhash == True ):
-                            hash['hash'].append("%s" % (j.encode('utf-8').lower()))
-                        elif (matchip == True):
-                            isinWl = self.isInWhitelist(j)
-                            if (isinWl == True):
-                                continue
-                            else:
-                                ip['ip'].append("%s" % (j.encode('utf-8').lower()))
-                        else:
-                            isinWl = self.isInWhitelist(j.lower())
-                            if (isinWl == True):
-                                continue
-                            else:
-                                domain['domain'].append("%s" % (j.encode('utf-8').lower()))
-
-        if toFile == True:
-            print "writing to file...."
-            print hash
-            #with open(outFile, 'w') as fd:
-            #    fd.write('\n'.join(fileOut))
-        else:
-            print '\n'.join(fileOut)
-        '''
 
     def get_hashes(self, html, ioc_data, regex):
         if (str(type(html)) == "<type 'str'>"):
@@ -400,7 +348,6 @@ def main():
     group.add_argument('--email',
                        help='looks for iocs on gmail inbox. username and password are required (username pass)',
                        nargs=2)
-    group.add_argument('-w', dest='write', help='write Results to a file', nargs=1, required=False)
     group.add_argument('--format', help='output format', choices=('csv', 'json'), nargs=1, required=False)
     args = options.parse_args()
 
@@ -453,10 +400,9 @@ def main():
     if args.email:
         iocObj.parse_gmail(args.email[0], args.email[1], ioc_data)
 
-    if args.write and args.format:
-        iocObj.print_iocs(ioc_data, True, args.write[0], args.format[0])
-    else:
-        iocObj.print_iocs(ioc_data, False, None, args.format[0])
+    if args.format:
+        iocObj.print_iocs(ioc_data, args.format[0])
+
 
 
 if __name__ == '__main__':
