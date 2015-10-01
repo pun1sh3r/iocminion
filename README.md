@@ -13,7 +13,7 @@ Just another tool to extract IOC's from files. this tool has the capability to e
 ======
 ```
 usage: iocminion.py [-h] [--rss RSS] [--url_file URL_FILE] [--url URL]
-                    [--pdf PDF] [--email EMAIL EMAIL] [--write WRITE]
+                    [--pdf PDF] [--email EMAIL EMAIL]
 
 welcome to iocMinion
 
@@ -26,7 +26,7 @@ Formats supported:
   --url URL            process url
   --pdf PDF            process pdf on an url or a pdf on the filesystem. make sure filename doesnt contain spaces
   --email EMAIL EMAIL  looks for iocs on gmail inbox. username and password are required (username pass)
-  --write WRITE        write Results to a file
+  --format {csv,json}  output format
 
 ```
 # Usecases:
